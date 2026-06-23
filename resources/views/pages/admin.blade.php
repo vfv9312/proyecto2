@@ -21,6 +21,18 @@
             @livewire('admin.dashboard')
         @break
 
+        @case(6)
+            @livewire('admin.guests-manager')
+        @break
+
+        @case(7)
+            @livewire('admin.wedding-settings')
+        @break
+
+        @case(8)
+            @livewire('admin.confirmations')
+        @break
+
         @default
     @endswitch
 @endsection

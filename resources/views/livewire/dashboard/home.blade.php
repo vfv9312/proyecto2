@@ -1,566 +1,287 @@
 <div>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
 
-        .font-script {
-            font-family: 'Great Vibes', cursive;
-        }
+        .font-script { font-family: 'Great Vibes', cursive; }
+        .font-serif-disp { font-family: 'Playfair Display', serif; }
+        .font-body { font-family: 'Montserrat', sans-serif; }
 
-        .font-serif {
-            font-family: 'Playfair Display', serif;
-        }
+        .bg-ivory { background-color: #FFFFF0; }
+        .bg-beige { background-color: #F5F5DC; }
+        .text-olive { color: #556B2F; }
+        .bg-olive { background-color: #556B2F; }
+        .text-gold { color: #D4AF37; }
+        .bg-gold { background-color: #D4AF37; }
+        .border-gold { border-color: #D4AF37; }
+        .bg-wood { background-color: #D2B48C; }
 
-        .font-sans {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .bg-ivory {
-            background-color: #FFFFF0;
-        }
-
-        .bg-beige {
-            background-color: #F5F5DC;
-        }
-
-        .text-olive {
-            color: #556B2F;
-        }
-
-        .bg-olive {
-            background-color: #556B2F;
-        }
-
-        .text-gold {
-            color: #D4AF37;
-        }
-
-        .border-gold {
-            border-color: #D4AF37;
-        }
-
-        .bg-wood {
-            background-color: #D2B48C;
-        }
-
-        /* Floating Petals Animation */
+        /* Floating Petals */
         @keyframes fall {
-            0% {
-                opacity: 0;
-                top: -10%;
-                transform: translateX(0) rotate(0deg);
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            20% {
-                transform: translateX(-20px) rotate(45deg);
-            }
-
-            40% {
-                transform: translateX(-40px) rotate(90deg);
-            }
-
-            60% {
-                transform: translateX(20px) rotate(135deg);
-            }
-
-            80% {
-                transform: translateX(-10px) rotate(180deg);
-            }
-
-            100% {
-                top: 110%;
-                transform: translateX(-30px) rotate(225deg);
-                opacity: 0;
-            }
+            0%   { opacity: 0; top: -10%; transform: translateX(0) rotate(0deg); }
+            10%  { opacity: 1; }
+            50%  { transform: translateX(-30px) rotate(90deg); }
+            100% { top: 110%; transform: translateX(20px) rotate(225deg); opacity: 0; }
         }
-
         .petal {
             position: absolute;
-            width: 15px;
-            height: 15px;
+            width: 14px;
+            height: 14px;
             background: #f7e1d7;
-            border-radius: 15px 0 15px 0;
+            border-radius: 14px 0 14px 0;
             opacity: 0;
-            animation: fall 10s infinite linear;
-            z-index: 10;
+            animation: fall 12s infinite linear;
         }
 
-        /* Animations */
+        /* Fade in */
         .fade-in-up {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 1s ease-out, transform 1s ease-out;
+            transform: translateY(40px);
+            transition: opacity 0.9s ease-out, transform 0.9s ease-out;
         }
+        .fade-in-up.visible { opacity: 1; transform: translateY(0); }
 
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .glow-btn {
-            animation: glow 2s infinite alternate;
-        }
-
-        @keyframes glow {
-            from {
-                box-shadow: 0 0 10px -10px #D4AF37;
-            }
-
-            to {
-                box-shadow: 0 0 20px 5px #D4AF37;
-            }
-        }
-
-        /* Parallax Background */
-        .parallax-bg {
-            background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
-            background-attachment: fixed;
-            background-position: center;
-            background-repeat: no-repeat;
+        /* Hero */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.6)),
+                url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Shimmer badge */
+        @keyframes shimmer {
+            0%   { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        .shimmer-badge {
+            background: linear-gradient(90deg, #D4AF37, #fff6c7, #D4AF37);
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Feature card hover */
+        .feature-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(85,107,47,0.15); }
+        .feature-card { transition: all 0.35s ease; }
+
+        /* Sample preview */
+        .preview-frame {
+            border-radius: 20px;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        /* CTA pulse */
+        @keyframes pulse-ring {
+            0%   { transform: scale(1); opacity: 0.7; }
+            70%  { transform: scale(1.15); opacity: 0; }
+            100% { transform: scale(1.15); opacity: 0; }
+        }
+        .cta-pulse::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 9999px;
+            background: #D4AF37;
+            animation: pulse-ring 2s ease-out infinite;
+            z-index: -1;
         }
     </style>
 
-    <div class="bg-ivory font-sans text-gray-800 overflow-x-hidden" x-data="{ musicPlaying: false, showEnvelope: false }">
-
-        <!-- Audio -->
-        <audio id="bg-music" loop>
-            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-        </audio>
+    <div class="bg-ivory font-body text-gray-800 overflow-x-hidden" x-data="{}">
 
         <!-- Floating Petals -->
-        <div class="fixed inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-            @for ($i = 0; $i < 15; $i++)
-                <div class="petal"
-                    style="left: {{ rand(5, 95) }}%; animation-delay: {{ rand(0, 10) }}s; animation-duration: {{ rand(8, 15) }}s;">
-                </div>
+        <div class="fixed inset-0 pointer-events-none overflow-hidden z-0" aria-hidden="true">
+            @for ($i = 0; $i < 18; $i++)
+                <div class="petal" style="left: {{ rand(3, 97) }}%; animation-delay: {{ rand(0, 12) }}s; animation-duration: {{ rand(8, 18) }}s;"></div>
             @endfor
         </div>
 
-        <!-- 1. Pantalla de bienvenida -->
-        <section class="relative h-screen flex items-center justify-center parallax-bg">
-            <div class="absolute inset-0 bg-white/40"></div>
-            <div class="relative z-10 text-center px-4" x-data="{ show: false }" x-init="setTimeout(() => show = true, 500)">
-                <div class="transition-all duration-1000 transform"
-                    :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'">
-                    <p class="text-olive font-sans tracking-widest uppercase text-sm md:text-base mb-4">Nuestra Boda</p>
-                    <h1 class="font-script text-6xl md:text-8xl text-olive mb-4 drop-shadow-md">Yuri & Vladimir</h1>
-                    <p class="font-serif text-xl md:text-2xl text-gray-700 italic mb-10">18 de Diciembre, 2026</p>
+        {{-- ─────────────────────────────────────────────
+             HERO SECTION
+        ───────────────────────────────────────────── --}}
+        <section class="hero-bg relative min-h-screen flex items-center justify-center text-white overflow-hidden">
+            <div class="relative z-10 text-center px-6 max-w-4xl mx-auto" x-data="{ show: false }" x-init="setTimeout(() => show = true, 300)">
 
-                    <button @click="document.getElementById('countdown').scrollIntoView({behavior: 'smooth'})"
-                        class="bg-olive text-white px-8 py-3 rounded-full uppercase tracking-wider text-sm hover:bg-[#435522] transition shadow-lg inline-flex items-center space-x-2">
-                        <span>Abrir Invitación</span>
-                        <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-                        </svg>
-                    </button>
+                <div :class="show ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'" class="transition-all duration-1000">
 
-                    <!-- Music Toggle -->
-                    <div class="mt-8">
-                        <button
-                            @click="musicPlaying ? document.getElementById('bg-music').pause() : document.getElementById('bg-music').play(); musicPlaying = !musicPlaying"
-                            class="w-12 h-12 bg-white/80 rounded-full flex items-center justify-center mx-auto text-olive hover:bg-white transition shadow">
-                            <svg x-show="!musicPlaying" class="w-6 h-6" fill="none" stroke="currentColor"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5 10v4a2 2 0 002 2h2l5 5V3l-5 5H7a2 2 0 00-2 2z">
-                                </path>
-                            </svg>
-                            <svg x-show="musicPlaying" x-cloak class="w-6 h-6 animate-pulse" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z">
-                                </path>
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2"></path>
-                            </svg>
-                        </button>
+                    <p class="shimmer-badge text-sm md:text-base font-bold tracking-[0.3em] uppercase mb-6">
+                        ✦ Invitaciones Digitales de Boda ✦
+                    </p>
+
+                    <h1 class="font-script text-7xl md:text-9xl mb-6 drop-shadow-xl leading-none">
+                        Tu Gran Día,<br>Contado al Mundo
+                    </h1>
+
+                    <p class="font-serif-disp text-lg md:text-2xl italic text-white/90 mb-10 max-w-2xl mx-auto">
+                        Crea una invitación digital única y personalizada para cada invitado,
+                        con confirmaciones en tiempo real y galería de fotos colaborativa.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="{{ route('login') }}" class="relative cta-pulse inline-flex items-center gap-3 bg-gold text-gray-900 font-bold px-10 py-4 rounded-full text-base hover:scale-105 transition-transform shadow-xl">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                            Crear Mi Invitación
+                        </a>
+                        <a href="#features" @click.prevent="document.getElementById('features').scrollIntoView({behavior:'smooth'})"
+                           class="inline-flex items-center gap-2 border-2 border-white/60 text-white px-8 py-4 rounded-full text-base hover:bg-white/10 transition">
+                            Ver características
+                            <svg class="w-4 h-4 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Scroll indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-60">
+                <span class="text-xs tracking-widest uppercase text-white">Descubre</span>
+                <div class="w-px h-10 bg-gradient-to-b from-white to-transparent"></div>
+            </div>
         </section>
 
-        <!-- 2. Cuenta regresiva -->
-        <section id="countdown" class="py-20 bg-beige" x-data="countdownData()" x-init="initTimer()">
-            <div class="container mx-auto px-4 max-w-4xl text-center fade-in-up"
-                x-intersect="$el.classList.add('visible')">
-                <h2 class="font-serif text-3xl md:text-4xl text-olive mb-10 italic">Faltan</h2>
-                <div class="flex justify-center gap-4 md:gap-10">
-                    <div class="flex flex-col items-center">
-                        <div
-                            class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-gold flex items-center justify-center bg-white shadow-md">
-                            <span class="text-2xl md:text-4xl font-serif text-olive" x-text="days"></span>
-                        </div>
-                        <span class="mt-2 text-xs md:text-sm uppercase tracking-widest text-gray-600">Días</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div
-                            class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-gold flex items-center justify-center bg-white shadow-md">
-                            <span class="text-2xl md:text-4xl font-serif text-olive" x-text="hours"></span>
-                        </div>
-                        <span class="mt-2 text-xs md:text-sm uppercase tracking-widest text-gray-600">Horas</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div
-                            class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-gold flex items-center justify-center bg-white shadow-md">
-                            <span class="text-2xl md:text-4xl font-serif text-olive" x-text="minutes"></span>
-                        </div>
-                        <span class="mt-2 text-xs md:text-sm uppercase tracking-widest text-gray-600">Minutos</span>
-                    </div>
-                    <div class="flex flex-col items-center">
-                        <div
-                            class="w-16 h-16 md:w-24 md:h-24 rounded-full border-2 border-gold flex items-center justify-center bg-white shadow-md">
-                            <span class="text-2xl md:text-4xl font-serif text-olive" x-text="seconds"></span>
-                        </div>
-                        <span class="mt-2 text-xs md:text-sm uppercase tracking-widest text-gray-600">Segundos</span>
-                    </div>
+        {{-- ─────────────────────────────────────────────
+             FEATURES
+        ───────────────────────────────────────────── --}}
+        <section id="features" class="py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="text-center mb-16 fade-in-up" x-intersect="$el.classList.add('visible')">
+                    <span class="text-olive text-sm font-bold tracking-widest uppercase">¿Por qué elegirnos?</span>
+                    <h2 class="font-script text-5xl md:text-6xl text-olive mt-3 mb-4">Todo lo que necesitas</h2>
+                    <p class="text-gray-500 text-base max-w-xl mx-auto font-serif-disp italic">Una plataforma completa para gestionar tu boda digital de principio a fin.</p>
                 </div>
-            </div>
-            <script>
-                function countdownData() {
-                    return {
-                        days: '00',
-                        hours: '00',
-                        minutes: '00',
-                        seconds: '00',
-                        initTimer() {
-                            const countDownDate = new Date("Nov 25, 2026 15:00:00").getTime();
-                            setInterval(() => {
-                                const now = new Date().getTime();
-                                const distance = countDownDate - now;
-                                if (distance < 0) return;
-                                this.days = Math.floor(distance / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
-                                this.hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString()
-                                    .padStart(2, '0');
-                                this.minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(
-                                    2, '0');
-                                this.seconds = Math.floor((distance % (1000 * 60)) / 1000).toString().padStart(2, '0');
-                            }, 1000);
-                        }
-                    }
-                }
-            </script>
-        </section>
 
-        <!-- 3. Nuestra Historia -->
-        <section class="py-20 bg-ivory">
-            <div class="container mx-auto px-4 max-w-4xl text-center">
-                <h2 class="font-script text-5xl text-olive mb-12">Nuestra Historia</h2>
-                <div class="relative border-l-2 border-gold md:mx-auto md:w-1/2">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-                    <div class="mb-10 ml-6 relative fade-in-up" x-intersect="$el.classList.add('visible')">
-                        <div class="absolute w-4 h-4 bg-gold rounded-full -left-[1.95rem] top-2 shadow"></div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-beige text-left">
-                            <span class="text-sm font-bold text-olive">Marzo 2020</span>
-                            <h3 class="font-serif text-xl mb-2">Nos Conocimos</h3>
-                            <p class="text-sm text-gray-600">Un encuentro casual en un café de la ciudad que cambió
-                                nuestras vidas para siempre.</p>
-                        </div>
-                    </div>
+                    @php
+                    $features = [
+                        ['icon' => 'M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z', 'color' => 'olive', 'bg' => '#556B2F', 'title' => 'Personalización Total', 'desc' => 'Cada invitado recibe su propia URL con su nombre, mesa asignada, número de pases y hasta un video dedicado.'],
+                        ['icon' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4', 'color' => 'indigo', 'bg' => '#4F46E5', 'title' => 'Confirmaciones en Tiempo Real', 'desc' => 'Tus invitados confirman asistencia directamente en su invitación. Tú ves el conteo instantáneo desde el panel.'],
+                        ['icon' => 'M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z', 'color' => 'amber', 'bg' => '#D97706', 'title' => 'Galería Colaborativa', 'desc' => 'Los invitados suben sus fotos de la boda y se agregan automáticamente a una galería compartida en tiempo real.'],
+                        ['icon' => 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z', 'color' => 'rose', 'bg' => '#E11D48', 'title' => 'Mesa de Regalos', 'desc' => 'Incluye tus datos bancarios de forma elegante para que los invitados puedan obsequiarte fácilmente.'],
+                        ['icon' => 'M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3', 'color' => 'purple', 'bg' => '#7C3AED', 'title' => 'Música de Fondo', 'desc' => 'Personaliza la canción de fondo de la invitación para crear una atmósfera romántica desde el primer segundo.'],
+                        ['icon' => 'M12 18h.01M8 21h8a2 2 0 002-2v-1a4 4 0 00-4-4H8a4 4 0 00-4 4v1a2 2 0 002 2zM12 11a4 4 0 100-8 4 4 0 000 8z', 'color' => 'teal', 'bg' => '#0D9488', 'title' => 'Panel de Administración', 'desc' => 'Gestiona todos tus invitados, genera sus links únicos y controla mesas y asientos desde un solo lugar.'],
+                    ];
+                    @endphp
 
-                    <div class="mb-10 ml-6 relative fade-in-up" x-intersect="$el.classList.add('visible')">
-                        <div class="absolute w-4 h-4 bg-gold rounded-full -left-[1.95rem] top-2 shadow"></div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-beige text-left">
-                            <span class="text-sm font-bold text-olive">Diciembre 2022</span>
-                            <h3 class="font-serif text-xl mb-2">Nuestro Primer Viaje</h3>
-                            <p class="text-sm text-gray-600">Exploramos montañas y bosques, confirmando que nuestro amor
-                                crecía con cada aventura.</p>
-                        </div>
-                    </div>
-
-                    <div class="mb-10 ml-6 relative fade-in-up" x-intersect="$el.classList.add('visible')">
-                        <div class="absolute w-4 h-4 bg-gold rounded-full -left-[1.95rem] top-2 shadow"></div>
-                        <div class="bg-white p-6 rounded-lg shadow-md border border-beige text-left">
-                            <span class="text-sm font-bold text-olive">Octubre 2025</span>
-                            <h3 class="font-serif text-xl mb-2">El Compromiso</h3>
-                            <p class="text-sm text-gray-600">Bajo un cielo estrellado y rodeados de naturaleza,
-                                decidimos unir nuestros caminos.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- 4. Información del evento -->
-        <section class="py-20 bg-wood/20">
-            <div class="container mx-auto px-4 max-w-5xl">
-                <h2 class="font-serif text-3xl md:text-4xl text-olive text-center mb-12 italic">Detalles del Evento
-                </h2>
-
-                <div class="grid md:grid-cols-2 gap-8">
-                    <!-- Ceremonia -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-olive text-center fade-in-up"
-                        x-intersect="$el.classList.add('visible')">
-                        <svg class="w-12 h-12 mx-auto text-gold mb-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                        </svg>
-                        <h3 class="font-serif text-2xl text-olive mb-2">Ceremonia Religiosa</h3>
-                        <p class="font-bold text-gray-800 mb-1">Sábado 25 de Noviembre</p>
-                        <p class="text-gray-600 mb-4">15:00 hrs</p>
-                        <p class="text-sm text-gray-500 mb-6">Parroquia de San Miguel Arcángel<br>Calle Principal #123,
-                            Centro.</p>
-                        <a href="https://maps.google.com" target="_blank"
-                            class="inline-block border border-olive text-olive px-6 py-2 rounded-full hover:bg-olive hover:text-white transition text-sm">Ver
-                            en Mapa</a>
-                    </div>
-
-                    <!-- Recepción -->
-                    <div class="bg-white p-8 rounded-xl shadow-lg border-t-4 border-olive text-center fade-in-up"
-                        style="transition-delay: 200ms;" x-intersect="$el.classList.add('visible')">
-                        <svg class="w-12 h-12 mx-auto text-gold mb-4" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"></path>
-                        </svg>
-                        <h3 class="font-serif text-2xl text-olive mb-2">Recepción</h3>
-                        <p class="font-bold text-gray-800 mb-1">Sábado 25 de Noviembre</p>
-                        <p class="text-gray-600 mb-4">17:00 hrs</p>
-                        <p class="text-sm text-gray-500 mb-6">Jardín Los Encinos<br>Km 15 Carretera al Bosque.</p>
-                        <a href="https://maps.google.com" target="_blank"
-                            class="inline-block border border-olive text-olive px-6 py-2 rounded-full hover:bg-olive hover:text-white transition text-sm">Ver
-                            en Mapa</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 5. Distribución de mesas -->
-        <section class="py-20 bg-ivory">
-            <div class="container mx-auto px-4 max-w-xl text-center fade-in-up"
-                x-intersect="$el.classList.add('visible')">
-                <h2 class="font-script text-5xl text-olive mb-6">Tu Lugar</h2>
-                <p class="text-gray-600 mb-8 text-sm">Ingresa tu nombre para buscar tu lugar asignado en nuestra boda.
-                </p>
-
-                <div class="bg-white p-8 rounded-2xl shadow-xl border border-beige relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-olive to-gold"></div>
-
-                    <!-- Search input (Simulated) -->
-                    <div class="mb-6">
-                        <input type="text" placeholder="Tu nombre completo..."
-                            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-olive focus:ring-1 focus:ring-olive transition">
-                    </div>
-
-                    <!-- Placeholder Results -->
-                    <div class="p-6 bg-beige/30 rounded-xl border border-gold/30">
-                        <h4 class="font-serif text-xl text-olive mb-4">¡Te esperamos, Invitado!</h4>
-                        <div class="grid grid-cols-2 gap-4 text-left">
-                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-olive">
-                                <span class="block text-xs text-gray-500 uppercase">Mesa</span>
-                                <span class="font-bold text-lg text-gray-800">Mesa 5</span>
-                                <span class="block text-xs text-gray-400 italic">"Los Pinos"</span>
-                            </div>
-                            <div class="bg-white p-3 rounded shadow-sm border-l-4 border-gold">
-                                <span class="block text-xs text-gray-500 uppercase">Asientos</span>
-                                <span class="font-bold text-lg text-gray-800">2</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. Video personalizado -->
-        <section class="py-20 bg-olive text-white relative">
-            <!-- Decorative overlay -->
-            <div class="absolute inset-0 opacity-10"
-                style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');">
-            </div>
-
-            <div class="container mx-auto px-4 max-w-4xl text-center relative z-10 fade-in-up"
-                x-intersect="$el.classList.add('visible')">
-                <h2 class="font-serif text-3xl md:text-4xl text-gold mb-4 italic">Un Mensaje para Ti</h2>
-                <p class="font-sans font-light mb-10 opacity-90">Queremos compartir nuestra felicidad contigo.</p>
-
-                <div
-                    class="relative p-2 md:p-4 bg-wood/40 rounded-2xl shadow-2xl backdrop-blur-sm border border-gold/30 inline-block w-full">
-                    <div
-                        class="aspect-w-16 aspect-h-9 w-full bg-black rounded-xl overflow-hidden relative shadow-inner">
-                        <!-- Placeholder video via iframe or video tag -->
-                        <div
-                            class="absolute inset-0 flex items-center justify-center bg-gray-900 group cursor-pointer hover:bg-gray-800 transition">
-                            <svg class="w-16 h-16 text-white/70 group-hover:text-gold transition transform group-hover:scale-110"
-                                fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd"
-                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                                    clip-rule="evenodd"></path>
+                    @foreach($features as $i => $f)
+                    <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm fade-in-up"
+                         style="transition-delay: {{ $i * 80 }}ms"
+                         x-intersect="$el.classList.add('visible')">
+                        <div class="w-14 h-14 rounded-2xl flex items-center justify-center mb-5" style="background-color: {{ $f['bg'] }}1A;">
+                            <svg class="w-7 h-7" style="color: {{ $f['bg'] }};" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="{{ $f['icon'] }}"/>
                             </svg>
                         </div>
+                        <h3 class="font-bold text-gray-900 text-lg mb-2">{{ $f['title'] }}</h3>
+                        <p class="text-gray-500 text-sm leading-relaxed">{{ $f['desc'] }}</p>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+        {{-- ─────────────────────────────────────────────
+             PREVIEW / MOCKUP
+        ───────────────────────────────────────────── --}}
+        <section class="py-24 bg-ivory">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="grid md:grid-cols-2 gap-16 items-center">
+                    <div class="fade-in-up" x-intersect="$el.classList.add('visible')">
+                        <span class="text-olive text-sm font-bold tracking-widest uppercase">Diseño premium</span>
+                        <h2 class="font-script text-5xl md:text-6xl text-olive mt-3 mb-6">Romántico y Elegante</h2>
+                        <p class="text-gray-600 mb-6 leading-relaxed">
+                            Nuestra invitación cuenta con un diseño campestre elegante con pétalos animados, tipografía exclusiva, cuenta regresiva en vivo y mucho más.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            @foreach(['Pétalos cayendo animados', 'Cuenta regresiva en tiempo real', 'Mapa al lugar del evento', 'Sección "Nuestra Historia"', 'Confirmación de asistencia integrada'] as $item)
+                            <li class="flex items-center gap-3 text-gray-700 text-sm">
+                                <span class="w-6 h-6 rounded-full bg-olive flex items-center justify-center flex-shrink-0">
+                                    <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                </span>
+                                {{ $item }}
+                            </li>
+                            @endforeach
+                        </ul>
+                        <a href="{{ route('login') }}" class="inline-flex items-center gap-2 bg-olive text-white px-8 py-3 rounded-full font-semibold hover:bg-[#435522] transition shadow-md text-sm">
+                            Comenzar ahora — Es gratis
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                        </a>
+                    </div>
+
+                    <div class="fade-in-up" style="transition-delay: 200ms" x-intersect="$el.classList.add('visible')">
+                        <div class="preview-frame">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                                 alt="Preview de invitación de boda"
+                                 class="w-full h-full object-cover">
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 7. Confirmación de asistencia -->
-        <section class="py-20 bg-beige relative overflow-hidden">
-            <div class="container mx-auto px-4 max-w-2xl fade-in-up" x-intersect="$el.classList.add('visible')">
-                <div class="bg-white p-10 rounded-3xl shadow-xl relative z-10">
-                    <div class="text-center mb-8">
-                        <h2 class="font-script text-5xl text-olive mb-2">Asistencia</h2>
-                        <p class="text-gray-600 text-sm">Por favor confirma tu asistencia antes del 1 de Noviembre.</p>
+        {{-- ─────────────────────────────────────────────
+             HOW IT WORKS
+        ───────────────────────────────────────────── --}}
+        <section class="py-24 bg-olive text-white relative overflow-hidden">
+            <div class="absolute inset-0 opacity-5" style="background-image: url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+            <div class="container mx-auto px-6 max-w-5xl relative z-10">
+                <div class="text-center mb-16 fade-in-up" x-intersect="$el.classList.add('visible')">
+                    <h2 class="font-script text-5xl md:text-6xl text-gold mb-4">¿Cómo funciona?</h2>
+                    <p class="text-white/80 font-serif-disp italic">En tres sencillos pasos</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-10">
+                    @foreach([
+                        ['num' => '01', 'title' => 'Personaliza tu boda', 'desc' => 'Ingresa los datos de tu evento: nombres, fechas, lugares, música y más desde el panel de administración.'],
+                        ['num' => '02', 'title' => 'Agrega tus invitados', 'desc' => 'Crea cada invitado con su nombre, número de pases, mesa asignada y si quieres, un video personalizado.'],
+                        ['num' => '03', 'title' => 'Comparte el link', 'desc' => 'Cada invitado recibe una URL única. Ellos confirman asistencia y tú ves todo en tiempo real.'],
+                    ] as $i => $step)
+                    <div class="text-center fade-in-up" style="transition-delay: {{ $i * 150 }}ms" x-intersect="$el.classList.add('visible')">
+                        <div class="text-gold font-script text-7xl mb-4 opacity-80">{{ $step['num'] }}</div>
+                        <h3 class="font-bold text-xl mb-3">{{ $step['title'] }}</h3>
+                        <p class="text-white/70 text-sm leading-relaxed">{{ $step['desc'] }}</p>
                     </div>
-
-                    <form class="space-y-6" wire:submit.prevent="submit">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
-                            <input type="text"
-                                class="w-full border-b-2 border-gray-300 px-3 py-2 focus:outline-none focus:border-olive transition bg-transparent"
-                                placeholder="Ej. Juan Pérez">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Número de Asistentes</label>
-                            <select
-                                class="w-full border-b-2 border-gray-300 px-3 py-2 focus:outline-none focus:border-olive transition bg-transparent">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">¿Asistirás?</label>
-                            <div class="flex gap-4">
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="radio" name="attending"
-                                        class="text-olive focus:ring-olive w-4 h-4">
-                                    <span class="text-gray-700">Sí, ahí estaré</span>
-                                </label>
-                                <label class="flex items-center space-x-2 cursor-pointer">
-                                    <input type="radio" name="attending"
-                                        class="text-olive focus:ring-olive w-4 h-4">
-                                    <span class="text-gray-700">No podré asistir</span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="pt-4 text-center">
-                            <button type="submit"
-                                class="bg-olive text-white px-10 py-3 rounded-full hover:bg-[#435522] transition shadow-lg uppercase tracking-wide text-sm">Confirmar</button>
-                        </div>
-                    </form>
+                    @endforeach
                 </div>
             </div>
         </section>
 
-        <!-- 8. Mesa de regalos -->
-        <section class="py-20 bg-ivory">
-            <div class="container mx-auto px-4 max-w-3xl text-center fade-in-up"
-                x-intersect="$el.classList.add('visible')">
-                <svg class="w-16 h-16 mx-auto text-gold mb-6" fill="none" stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                        d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7">
-                    </path>
+        {{-- ─────────────────────────────────────────────
+             TESTIMONIAL / QUOTE
+        ───────────────────────────────────────────── --}}
+        <section class="py-24 bg-beige">
+            <div class="container mx-auto px-6 max-w-3xl text-center fade-in-up" x-intersect="$el.classList.add('visible')">
+                <svg class="w-12 h-12 text-gold mx-auto mb-6 opacity-60" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
                 </svg>
-                <h2 class="font-serif text-3xl md:text-4xl text-olive mb-6 italic">Mesa de Regalos</h2>
-
-                <p class="text-gray-600 mb-8 leading-relaxed max-w-xl mx-auto">
-                    El mejor regalo es tu presencia. Pero si deseas tener un detalle con nosotros, agradeceríamos mucho
-                    recibir tu regalo en efectivo para ayudarnos a comenzar esta nueva etapa juntos.
+                <p class="font-serif-disp text-2xl md:text-3xl italic text-gray-700 mb-8 leading-relaxed">
+                    "Nuestros invitados quedaron sorprendidos con la invitación digital. La funcionalidad de confirmación en tiempo real nos ayudó a organizar todo sin estrés."
                 </p>
-
-                <button @click="showEnvelope = !showEnvelope"
-                    class="border-2 border-gold text-olive px-8 py-3 rounded-full hover:bg-gold hover:text-white transition inline-flex items-center space-x-2 font-medium">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
-                        </path>
-                    </svg>
-                    <span>Ver Datos Bancarios</span>
-                </button>
-
-                <div x-show="showEnvelope" x-collapse x-cloak class="mt-8">
-                    <div
-                        class="bg-white p-8 rounded-xl shadow-md border border-beige max-w-md mx-auto relative transform transition-all">
-                        <div
-                            class="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-white border-l border-t border-beige rotate-45">
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-4">Transferencia Bancaria</h4>
-                        <p class="text-sm text-gray-600 mb-2">Banco: <span
-                                class="font-semibold text-gray-800">BBVA</span></p>
-                        <p class="text-sm text-gray-600 mb-2">Titular: <span
-                                class="font-semibold text-gray-800">Carlos y Ana</span></p>
-                        <p class="text-sm text-gray-600 mb-4">CLABE: <span class="font-semibold text-gray-800">0123
-                                4567 8901 2345 67</span></p>
-                        <p class="text-xs text-gray-400 italic">¡Muchas gracias por tu cariño!</p>
+                <div class="flex items-center justify-center gap-3">
+                    <div class="w-12 h-12 rounded-full bg-olive flex items-center justify-center text-white font-bold">M</div>
+                    <div class="text-left">
+                        <p class="font-semibold text-gray-800">María & Roberto</p>
+                        <p class="text-sm text-gray-500">Boda en Tuxtla Gutiérrez, 2025</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- 9. Galería -->
-        <section class="py-20 bg-wood/10" x-data="{ imgModal: false, imgModalSrc: '' }">
-            <div class="container mx-auto px-4">
-                <h2 class="font-script text-5xl text-olive mb-12 text-center">Nuestros Momentos</h2>
-
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <!-- Gallery Items -->
-                    @for ($i = 1; $i <= 8; $i++)
-                        <div class="aspect-w-1 aspect-h-1 overflow-hidden rounded-lg shadow-sm cursor-pointer group fade-in-up"
-                            style="transition-delay: {{ $i * 100 }}ms" x-intersect="$el.classList.add('visible')"
-                            @click="imgModalSrc = 'https://source.unsplash.com/random/800x800/?wedding,couple,nature&sig={{ $i }}'; imgModal = true">
-                            <img src="https://source.unsplash.com/random/400x400/?wedding,couple,nature&sig={{ $i }}"
-                                alt="Galeria {{ $i }}"
-                                class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
-                            <div
-                                class="absolute inset-0 bg-olive/20 opacity-0 group-hover:opacity-100 transition duration-300 flex items-center justify-center">
-                                <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </div>
-                        </div>
-                    @endfor
-                </div>
-            </div>
-
-            <!-- Lightbox Modal -->
-            <div x-show="imgModal" x-cloak
-                class="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
-                x-transition:enter="transition ease-out duration-300" x-transition:enter-start="opacity-0"
-                x-transition:enter-end="opacity-100" x-transition:leave="transition ease-in duration-200"
-                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0">
-                <button @click="imgModal = false"
-                    class="absolute top-6 right-6 text-white hover:text-gold transition">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-                <img :src="imgModalSrc" class="max-w-full max-h-[90vh] object-contain rounded shadow-2xl"
-                    @click.away="imgModal = false">
-            </div>
-        </section>
-
-        <!-- 10. Mensaje final -->
-        <section class="py-32 bg-olive text-center text-white relative overflow-hidden">
-            <!-- Decorative corner leaves -->
-            <svg class="absolute top-0 left-0 w-32 h-32 text-gold/20 transform -translate-x-1/2 -translate-y-1/2"
-                fill="currentColor" viewBox="0 0 100 100">
-                <path
-                    d="M50 0C50 27.6 27.6 50 0 50C27.6 50 50 72.4 50 100C50 72.4 72.4 50 100 50C72.4 50 50 27.6 50 0Z" />
-            </svg>
-            <svg class="absolute bottom-0 right-0 w-32 h-32 text-gold/20 transform translate-x-1/2 translate-y-1/2"
-                fill="currentColor" viewBox="0 0 100 100">
-                <path
-                    d="M50 0C50 27.6 27.6 50 0 50C27.6 50 50 72.4 50 100C50 72.4 72.4 50 100 50C72.4 50 50 27.6 50 0Z" />
-            </svg>
-
-            <div class="container mx-auto px-4 relative z-10 fade-in-up" x-intersect="$el.classList.add('visible')">
-                <h2 class="font-script text-5xl md:text-6xl mb-6">Gracias</h2>
-                <p class="font-serif text-xl md:text-2xl mb-12 max-w-2xl mx-auto italic font-light">"El amor no se mira
-                    con los ojos, sino con el corazón."</p>
-                <button
-                    class="bg-gold text-olive px-10 py-4 rounded-full font-bold uppercase tracking-widest text-sm hover:bg-white transition glow-btn inline-block">
-                    Nos vemos en nuestra boda
-                </button>
+        {{-- ─────────────────────────────────────────────
+             FINAL CTA
+        ───────────────────────────────────────────── --}}
+        <section class="py-24 bg-white">
+            <div class="container mx-auto px-6 max-w-2xl text-center fade-in-up" x-intersect="$el.classList.add('visible')">
+                <h2 class="font-script text-6xl md:text-7xl text-olive mb-4">¡Tu boda merece lo mejor!</h2>
+                <p class="text-gray-500 mb-10 font-serif-disp italic text-lg">Crea tu invitación digital hoy mismo — elegante, personalizada y completamente gratis.</p>
+                <a href="{{ route('login') }}"
+                   class="relative inline-flex items-center gap-3 bg-olive text-white font-bold px-12 py-5 rounded-full text-lg hover:bg-[#435522] transition-all shadow-2xl hover:shadow-olive/30 hover:-translate-y-1">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    Crear Mi Invitación Gratis
+                </a>
+                <p class="mt-5 text-xs text-gray-400">Sin tarjeta de crédito. Lista en minutos.</p>
             </div>
         </section>
 

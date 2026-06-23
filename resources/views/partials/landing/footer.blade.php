@@ -2,7 +2,7 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
             <div class="col-span-1 md:col-span-1">
-                <a href="#" class="flex items-center gap-2 mb-6">
+                <a href="{{ session('guest_slug') ? route('invitation', session('guest_slug')) : route('home') }}" class="flex items-center gap-2 mb-6">
                     <span class="text-2xl font-black text-gray-900 dark:text-white tracking-tighter font-serif italic text-olive">
                         Nuestra Boda
                     </span>

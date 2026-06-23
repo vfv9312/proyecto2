@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/', 'DashBoardController@home')->name('home');
 Route::get('/galeria', 'DashBoardController@gallery')->name('gallery');
+Route::get('/invitado/{slug}', 'DashBoardController@invitation')->name('invitation');
 
 Route::get('login', 'AuthController@login')->name('login');
 Route::get('forget-password', 'AuthController@showForgetPasswordForm')->name('forget.password');
@@ -29,5 +30,9 @@ Route::middleware(['auth','status'])->group(function () {
 
     Route::middleware(['role:1'])->group(function () {
         Route::resource('users','Admin\AdminController')->except(['destroy', 'update','store']);
+        // Wedding Admin Routes
+        Route::get('admin/invitados', 'Admin\AdminController@guests')->name('admin.guests');
+        Route::get('admin/configuracion', 'Admin\AdminController@settings')->name('admin.settings');
+        Route::get('admin/confirmaciones', 'Admin\AdminController@confirmations')->name('admin.confirmations');
     });
 });

@@ -10,19 +10,21 @@ class Gallery extends Component
 {
     use WithFileUploads;
 
-    public $photo;
+    public $new_photos = [];
     public $successMessage = '';
 
-    public function updatedPhoto()
+    public function updatedNewPhotos()
     {
         $this->validate([
-            'photo' => 'image|max:5120', // 5MB Max
+            'new_photos.*' => 'image|max:10240', // 10MB Max per photo
         ]);
 
-        $this->photo->store('gallery', 'public');
+        foreach ($this->new_photos as $photo) {
+            $photo->store('gallery', 'public');
+        }
 
-        $this->successMessage = '¡Foto subida exitosamente!';
-        $this->photo = null;
+        $this->successMessage = count($this->new_photos) . ' fotos subidas exitosamente!';
+        $this->new_photos = [];
     }
 
     public function getPhotosProperty()

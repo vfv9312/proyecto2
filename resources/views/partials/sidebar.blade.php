@@ -156,18 +156,43 @@
                         </button>
                         <ul id="dropdown-example" class="hidden py-1 space-y-1 ml-4 pl-3 border-l-2 border-gray-100 dark:border-gray-700">
                             <li>
-                                <a href="#" class="flex items-center gap-2 p-2 text-sm text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 group transition-colors">
+                                <a href="{{ route('users.index') }}" class="flex items-center gap-2 p-2 text-sm text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 group transition-colors">
                                     <div class="w-1.5 h-1.5 rounded-full bg-gray-300 group-hover:bg-gray-900 dark:group-hover:bg-white transition-colors"></div>
                                     Lista de Usuarios
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="flex items-center gap-2 p-2 text-sm text-gray-700 rounded-lg dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 group transition-colors">
-                                    <div class="w-1.5 h-1.5 rounded-full bg-gray-300 group-hover:bg-gray-900 dark:group-hover:bg-white transition-colors"></div>
-                                    Roles y Permisos
-                                </a>
-                            </li>
                         </ul>
+                    </li>
+
+                    <li class="pt-4 pb-1">
+                        <span class="text-xs font-semibold text-gray-400 uppercase tracking-wider px-3">🌿 Boda</span>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.guests') }}" class="flex items-center p-3 text-gray-900 rounded-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group transition-all duration-300 {{ request()->routeIs('admin.guests') ? 'bg-green-50 dark:bg-green-900/30 font-bold text-green-700 dark:text-green-400' : '' }}">
+                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-green-700 group-hover:scale-110 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap group-hover:tracking-wide transition-all duration-300">Invitados</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.confirmations') }}" class="flex items-center p-3 text-gray-900 rounded-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group transition-all duration-300 {{ request()->routeIs('admin.confirmations') ? 'bg-green-50 dark:bg-green-900/30 font-bold text-green-700 dark:text-green-400' : '' }}">
+                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-green-700 group-hover:scale-110 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap group-hover:tracking-wide transition-all duration-300">Confirmaciones</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('admin.settings') }}" class="flex items-center p-3 text-gray-900 rounded-xl dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group transition-all duration-300 {{ request()->routeIs('admin.settings') ? 'bg-green-50 dark:bg-green-900/30 font-bold text-green-700 dark:text-green-400' : '' }}">
+                            <svg class="flex-shrink-0 w-5 h-5 text-gray-500 dark:text-gray-400 group-hover:text-green-700 group-hover:scale-110 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap group-hover:tracking-wide transition-all duration-300">Configuración Boda</span>
+                        </a>
                     </li>
                 </ul>
             </div>
