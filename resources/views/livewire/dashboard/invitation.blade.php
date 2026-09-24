@@ -67,7 +67,7 @@
 
         <!-- Audio -->
         <audio id="bg-music" loop>
-            <source src="{{ $settings['music_url'] ?? 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3' }}" type="audio/mpeg">
+            <source src="{{ $settings['music_url'] ?? asset('storage/wedding/9y6xx79TRQ3a9biil5Z5LwC3uM8CFRSZeiIi7fHb.mp3') }}" type="audio/mpeg">
         </audio>
 
         <!-- Floating Petals -->
@@ -140,15 +140,22 @@
                     </div>
 
                     @if($rsvp_submitted)
-                        <div class="text-center py-8">
-                            <svg class="w-16 h-16 text-green-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                            <h3 class="font-serif text-2xl text-olive mb-2">¡Gracias, {{ explode(' ', $guest->name)[0] }}!</h3>
-                            <p class="text-gray-500 text-sm">Hemos recibido tu confirmación. ¡Te esperamos con mucho cariño!</p>
-                            @if($guest->confirmed)
-                                <p class="mt-4 font-semibold text-olive">✓ Asistirás con {{ $guest->confirmed_tickets }} {{ $guest->confirmed_tickets == 1 ? 'persona' : 'personas' }}</p>
-                            @else
-                                <p class="mt-4 text-gray-500 italic">Lamentamos que no puedas asistir.</p>
-                            @endif
+                        <div class="text-center py-8" x-data="{ show: false }" x-init="setTimeout(() => show = true, 50)">
+                            <div x-show="show" 
+                                 x-transition:enter="transition ease-out duration-700 transform"
+                                 x-transition:enter-start="opacity-0 translate-y-10 scale-95"
+                                 x-transition:enter-end="opacity-100 translate-y-0 scale-100">
+                                <svg class="w-20 h-20 text-green-500 mx-auto mb-6 drop-shadow-md" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                <h3 class="font-script text-4xl text-olive mb-3">¡Gracias, {{ explode(' ', $guest->name)[0] }}!</h3>
+                                <p class="text-gray-600 text-lg">Hemos recibido tu confirmación.</p>
+                                @if($guest->confirmed)
+                                    <p class="mt-4 font-semibold text-olive bg-olive/10 inline-block px-5 py-2 rounded-full">✓ Asistirás con {{ $guest->confirmed_tickets }} {{ $guest->confirmed_tickets == 1 ? 'persona' : 'personas' }}</p>
+                                @else
+                                    <p class="mt-4 text-gray-500 italic">Lamentamos que no puedas asistir.</p>
+                                @endif
+                            </div>
                         </div>
                     @else
                         <form class="space-y-6" x-data="{ showConfirmModal: false }" @submit.prevent="showConfirmModal = true">
@@ -188,8 +195,7 @@
                             <div class="pt-2 text-center">
                                 <button type="submit"
                                     class="bg-olive text-white px-10 py-3 rounded-full hover:bg-[#435522] transition shadow-lg uppercase tracking-wide text-sm glow-btn">
-                                    <span wire:loading.remove>Confirmar Asistencia</span>
-                                    <span wire:loading>Enviando...</span>
+                                    <span>Confirmar Asistencia</span>
                                 </button>
                             </div>
 
@@ -212,7 +218,10 @@
                                     <p class="text-gray-600 text-sm mb-8">Estás a punto de enviar tu respuesta. Una vez confirmada, será definitivo.</p>
                                     <div class="flex gap-4 justify-center">
                                         <button type="button" @click="showConfirmModal = false" class="px-6 py-2.5 text-gray-500 bg-gray-100 rounded-full hover:bg-gray-200 transition font-medium text-sm">Cancelar</button>
-                                        <button type="button" @click="$wire.confirmRsvp(); showConfirmModal = false" class="bg-olive text-white px-6 py-2.5 rounded-full hover:bg-[#435522] transition shadow-lg font-medium text-sm">Sí, guardar</button>
+                                        <button type="button" wire:click="confirmRsvp" class="bg-olive text-white px-6 py-2.5 rounded-full hover:bg-[#435522] transition shadow-lg font-medium text-sm flex justify-center w-32">
+                                            <span wire:loading.remove wire:target="confirmRsvp">Sí, guardar</span>
+                                            <span wire:loading wire:target="confirmRsvp">Enviando...</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -230,15 +239,15 @@
                     <div class="absolute left-1/2 top-0 bottom-0 w-px bg-olive/20 hidden md:block"></div>
                     @php
                     $stories = [
-                        ['year' => '2019', 'title' => 'El Primer Encuentro', 'text' => 'En una tarde otoñal, nuestros caminos se cruzaron por primera vez. Una sonrisa fue suficiente para saber que algo especial comenzaba.', 'delay' => '0'],
-                        ['year' => '2021', 'title' => 'La Aventura Juntos', 'text' => 'Viajes, risas, desafíos y aprendizajes. Cada momento nos fue enseñando que somos el equipo perfecto el uno para el otro.', 'delay' => '100'],
-                        ['year' => '2026', 'title' => 'El Gran Sí', 'text' => 'Bajo un cielo estrellado y rodeados de naturaleza, decidimos unir nuestros caminos para siempre.', 'delay' => '200'],
+                        ['year' => '2022', 'title' => 'El Primer Encuentro', 'text' => 'A finales de 2022, nuestros caminos se cruzaron por primera vez. Lo que comenzó con una cena y una conversación que parecía no tener fin, pronto nos hizo descubrir una conexión especial. Entre risas, miradas y muchas coincidencias, encontramos en el otro a la persona con quien queríamos comenzar esta hermosa historia.', 'delay' => '0', 'image' => 'wedding/01imagen.jpeg'],
+                        ['year' => '2023', 'title' => 'Nuestra Aventura Juntos', 'text' => 'El 7 de enero de 2023 decidimos comenzar esta hermosa historia de amor. Desde entonces, cada lugar que hemos recorrido, grande o pequeño, se ha convertido en un recuerdo inolvidable. Porque entendimos que las mejores aventuras no dependen del destino, sino de la felicidad de compartir cada paso, cada sueño y cada momento tomados de la mano.', 'delay' => '100', 'image' => 'wedding/02imagen.jpeg'],
+                        ['year' => '2026', 'title' => 'El Gran Sí', 'text' => 'El 9 de enero de 2026 vivimos uno de los momentos más inolvidables de nuestras vidas. En un hermoso escenario al aire libre, un camino de flores, la música del mariachi y una pregunta que hizo detener el tiempo marcaron el inicio de un nuevo capítulo. Con un "Sí" lleno de amor y esperanza, decidimos unir nuestras vidas para siempre y comenzar la aventura más importante de todas. 💍🤍', 'delay' => '200', 'image' => 'wedding/03imagen.jpeg'],
                     ];
                     @endphp
                     @foreach($stories as $i => $s)
-                    <div class="flex flex-col {{ $i % 2 == 0 ? 'md:flex-row' : 'md:flex-row-reverse' }} gap-8 mb-16 fade-in-up" style="transition-delay: {{ $s['delay'] }}ms" x-intersect="$el.classList.add('visible')">
+                    <div class="flex flex-col {{ $i % 2 == 0 ? 'md:flex-row' : 'md:flex-row-reverse' }} items-center md:items-stretch gap-8 mb-16 fade-in-up" style="transition-delay: {{ $s['delay'] }}ms" x-intersect="$el.classList.add('visible')">
                         <div class="md:w-1/2 flex {{ $i % 2 == 0 ? 'md:justify-end' : 'md:justify-start' }}">
-                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-sm">
+                            <div class="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 max-w-sm hover:shadow-xl transition-shadow duration-300">
                                 <span class="font-script text-5xl text-gold">{{ $s['year'] }}</span>
                                 <h3 class="font-serif text-xl text-olive mt-2 mb-3">{{ $s['title'] }}</h3>
                                 <p class="text-sm text-gray-600 leading-relaxed">{{ $s['text'] }}</p>
@@ -246,6 +255,13 @@
                         </div>
                         <div class="hidden md:flex items-center justify-center md:w-0">
                             <div class="w-4 h-4 rounded-full bg-olive ring-4 ring-olive/20 absolute"></div>
+                        </div>
+                        <div class="md:w-1/2 flex {{ $i % 2 == 0 ? 'md:justify-start' : 'md:justify-end' }} w-full">
+                            @if(isset($s['image']))
+                            <div class="overflow-hidden rounded-2xl shadow-lg max-w-sm w-full group">
+                                <img src="{{ asset('storage/' . $s['image']) }}" alt="Historia {{ $s['year'] }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700 aspect-video md:aspect-[4/3]">
+                            </div>
+                            @endif
                         </div>
                     </div>
                     @endforeach
